@@ -62,7 +62,6 @@ public class PasswordWindowController {
         assert btnApply != null : "fx:id=\"btnApply\" was not injected: check your FXML file 'PasswordWindow.fxml'.";
         assert textFieldLogin != null : "fx:id=\"textFieldLogin\" was not injected: check your FXML file 'PasswordWindow.fxml'.";
         assert textFieldPassword != null : "fx:id=\"textFieldPassword\" was not injected: check your FXML file 'PasswordWindow.fxml'.";
-
     }
 
     public String getLogin() {
