@@ -13,10 +13,13 @@ import org.graalvm.compiler.phases.common.NodeCounterPhase;
 
 public class MainWindowController {
 
-    private String login;
-    private String password;
+
     private Role role;
     private boolean isOpen;
+
+    public Role getRole() {
+        return role;
+    }
 
     @FXML
     private ResourceBundle resources;
@@ -37,6 +40,9 @@ public class MainWindowController {
         if (!isOpen)
         openPasswordWindow();
 
+        if(!isOpen)
+            openCustomerApp();
+
     }
 
     @FXML
@@ -45,6 +51,9 @@ public class MainWindowController {
 
         if (!isOpen)
         openPasswordWindow();
+
+        if(!isOpen)
+            openEmployeeApp();
 
     }
 
@@ -57,6 +66,7 @@ public class MainWindowController {
 
     public void openPasswordWindow() {
         try {
+
             isOpen = true;
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/PasswordWindow.fxml"));
             Parent parent = fxmlLoader.load();
@@ -68,21 +78,41 @@ public class MainWindowController {
             stage.setScene(scene);
             stage.setTitle("Login and password");
             stage.initModality(Modality.WINDOW_MODAL);
-
+            passwordWindowController.setRole(role);
 
             stage.showAndWait();
             isOpen = false;
-
-            login = passwordWindowController.getLogin();
-            password = passwordWindowController.getPassword();
-
-            System.out.println(login);
-            System.out.println(password);
 
         }catch (IOException e) {
             e.printStackTrace();
         }
 
     }//end of openPasswordWindow
+
+    public void openCustomerApp(){
+
+        try {
+            isOpen = true;
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/CustomerApp.fxml"));
+            Parent parent = fxmlLoader.load();
+
+            CustomerAppController customerAppController = fxmlLoader.getController();
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Customer application");
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            stage.showAndWait();
+            isOpen = false;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//end of openCustomerApp
+
+    public void openEmployeeApp(){
+        System.out.println("też fajnie");
+    }//end of openEmployeeApp
 
 }//end of class

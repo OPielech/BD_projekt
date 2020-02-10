@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="242.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CustomerAppController">
+   <children>
+      <VBox layoutX="121.0" layoutY="47.0" prefHeight="605.0" prefWidth="100.0" spacing="15.0">
+         <children>
+            <VBox prefHeight="81.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <ChoiceBox fx:id="choiceBoxType1" prefWidth="150.0" />
+                  <ChoiceBox fx:id="choiceBoxColor1" prefWidth="150.0" />
+                  <ChoiceBox fx:id="choiceBoxAmount1" prefWidth="150.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="81.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <ChoiceBox fx:id="choiceBoxType2" prefWidth="150.0" />
+                  <ChoiceBox fx:id="choiceBoxColor2" prefWidth="150.0" />
+                  <ChoiceBox fx:id="choiceBoxAmount2" prefWidth="150.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="81.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <ChoiceBox fx:id="choiceBoxType3" prefWidth="150.0" />
+                  <ChoiceBox fx:id="choiceBoxColor3" prefWidth="150.0" />
+                  <ChoiceBox fx:id="choiceBoxAmount3" prefWidth="150.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="81.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <ChoiceBox fx:id="choiceBoxType4" prefWidth="150.0" />
+                  <ChoiceBox fx:id="choiceBoxColor4" prefWidth="150.0" />
+                  <ChoiceBox fx:id="choiceBoxAmount4" prefWidth="150.0" />
+               </children>
+            </VBox>
+            <ChoiceBox fx:id="choiceBoxArrangement" prefWidth="150.0" />
+            <VBox prefHeight="81.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <ChoiceBox fx:id="choiceBoxAddition1" prefWidth="150.0" />
+                  <ChoiceBox fx:id="choiceBoxAddition2" prefWidth="150.0" />
+                  <ChoiceBox fx:id="choiceBoxAddition3" prefWidth="150.0" />
+               </children>
+            </VBox>
+            <TextField fx:id="textFieldDate" />
+            <ChoiceBox fx:id="choiceBoxTime" prefWidth="150.0" />
+            <ChoiceBox fx:id="choiceBoxPayment" prefWidth="150.0" />
+            <TextField fx:id="textFieldPrize" editable="false" mouseTransparent="true" prefHeight="25.0" prefWidth="100.0" />
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="30.0" layoutY="749.0" prefHeight="40.0" prefWidth="182.0" spacing="20.0">
+         <children>
+            <Button fx:id="btnApply" mnemonicParsing="false" onAction="#btnApplyClicked" prefHeight="40.0" prefWidth="80.0" text="APPLY">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnClose" mnemonicParsing="false" onAction="#btnCloseClicked" prefHeight="40.0" prefWidth="80.0" text="CLOSE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <VBox layoutX="36.0" layoutY="80.0" prefHeight="352.0" prefWidth="55.0" spacing="83.0">
+         <children>
+            <Label text="FLOWER:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label text="FLOWER:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label text="FLOWER:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label text="FLOWER:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Label layoutX="16.0" layoutY="450.0" text="ARRANGEMENT:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="32.0" layoutY="520.0" text="ADDITION:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="591.0" text="DATE:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="632.0" text="TIME:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="712.0" text="PRIZE:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="672.0" text="PAYMENT:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

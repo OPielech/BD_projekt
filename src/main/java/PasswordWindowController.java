@@ -1,5 +1,7 @@
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +16,13 @@ public class PasswordWindowController {
     private String password;
     private boolean isLoginOk;
     private boolean isPasswordOk;
+    private Role role;
+    MainWindowController mainWindowController;
+    DataBase dataBase;
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     @FXML
     private ResourceBundle resources;
@@ -31,7 +40,7 @@ public class PasswordWindowController {
     private PasswordField textFieldPassword;
 
     @FXML
-    void btnApplyClicked(ActionEvent event) {
+    void btnApplyClicked(ActionEvent event) throws SQLException {
         try {
             login = textFieldLogin.getText();
             if (login.isEmpty())
@@ -43,10 +52,40 @@ public class PasswordWindowController {
             if (password.isEmpty()) {
                 throw new NullPointerException();
 
-            }
-            else
+            } else
                 isPasswordOk = true;
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
+            textFieldPassword.setPromptText("Invalid login or password");
+            textFieldLogin.setPromptText("Invalid login or password");
+        }
+
+        isLoginOk = false;
+        isPasswordOk = false;
+
+        dataBase = new DataBase(login, password);
+        System.out.println(role);
+
+        try {
+            if (role.equals(Role.CUSTOMER) && login.equals("klient")) {
+                dataBase.dbConnect();
+                if(dataBase.isConnectionOk()) {
+                    isLoginOk = true;
+                    isPasswordOk = true;
+                }else {
+                    throw new IllegalArgumentException();
+                }
+            } else if (role.equals(Role.EMPLOYEE) && login.equals("pracownik")){
+                dataBase.dbConnect();
+                if(dataBase.isConnectionOk()) {
+                    isLoginOk = true;
+                    isPasswordOk = true;
+                }else
+                    throw new IllegalArgumentException();
+            }else
+                throw new IllegalArgumentException();
+        } catch (IllegalArgumentException e) {
+            textFieldLogin.clear();
+            textFieldPassword.clear();
             textFieldPassword.setPromptText("Invalid login or password");
             textFieldLogin.setPromptText("Invalid login or password");
         }
