@@ -17,7 +17,7 @@ public class MainWindow extends Application {
         Parent parent = FXMLLoader.load(getClass().getResource("/fxml/MainWindow.fxml"));
         Scene scene = new Scene(parent);
 
-//        scene.getStylesheets().add();
+        scene.getStylesheets().add("/css/MainWindowCSS.css");
         primaryStage.setScene(scene);
         primaryStage.setTitle("Florist");
         primaryStage.show();

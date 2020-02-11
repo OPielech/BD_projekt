@@ -2,6 +2,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class EmployeeAppController {
 
@@ -305,7 +307,13 @@ public class EmployeeAppController {
 
     @FXML
     void btnSumClicked(ActionEvent event) {
-
+        double sum =0;
+        for (int i=0; i<tableOrders.getItems().size(); i++){
+            ObservableValue<String> a= colCena.getCellObservableValue(i);
+            Double b = Double.valueOf(a.getValue());
+            sum+=b;
+        }
+        textFieldSum.setText(String.valueOf(sum));
     }
 
     @FXML
@@ -369,30 +377,70 @@ public class EmployeeAppController {
     }
 
     private void populateCouriers(ObservableList<Couriers> orderData){
+        colCouriersID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colCouriersCity.setCellValueFactory(new PropertyValueFactory<>("obslugiwane_miasto"));
         tableCouriers.setItems(orderData);
     }
 
     private void populateMeasurements(ObservableList<Measurements> orderData){
+        colArrID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colArrType.setCellValueFactory(new PropertyValueFactory<>("typ"));
+        colArrPrice.setCellValueFactory(new PropertyValueFactory<>("cena"));
         tableArragements.setItems(orderData);
     }
 
     private void populateAdditions(ObservableList<Additions> orderData){
+        colAddID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colAddType.setCellValueFactory(new PropertyValueFactory<>("typ"));
+        colAddPrice.setCellValueFactory(new PropertyValueFactory<>("cena"));
         tableAdditions.setItems(orderData);
     }
 
     private void populateCustomer(ObservableList<Customer> orderData){
+        colCliID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colCliName.setCellValueFactory(new PropertyValueFactory<>("imie"));
+        colCliSurname.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
+        colCliStreet.setCellValueFactory(new PropertyValueFactory<>("ulica"));
+        colCliNumber.setCellValueFactory(new PropertyValueFactory<>("nr_domu"));
+        colCliPost.setCellValueFactory(new PropertyValueFactory<>("kod_pocztowy"));
+        colCliCity.setCellValueFactory(new PropertyValueFactory<>("miasto"));
         tableClients.setItems(orderData);
     }
 
     private void populateRecipients(ObservableList<Recipient> orderData){
+        colRecID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colRecName.setCellValueFactory(new PropertyValueFactory<>("imie"));
+        colRecSurname.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
+        colRecStreet.setCellValueFactory(new PropertyValueFactory<>("ulica"));
+        colRecNumber.setCellValueFactory(new PropertyValueFactory<>("nr_domu"));
+        colRecPost.setCellValueFactory(new PropertyValueFactory<>("kod_pocztowy"));
+        colRecCity.setCellValueFactory(new PropertyValueFactory<>("miasto"));
         tableRecipients.setItems(orderData);
     }
 
     private void populateOrders(ObservableList<Order> orderData){
+        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colIDKwiat.setCellValueFactory(new PropertyValueFactory<>("id_kwiat"));
+        colLiczbaSztuk.setCellValueFactory(new PropertyValueFactory<>("liczba_sztuk"));
+        colIDUlozenie.setCellValueFactory(new PropertyValueFactory<>("id_ulozenie"));
+        colIDDodatek.setCellValueFactory(new PropertyValueFactory<>("liczba_sztuk"));
+        colDataDostarczenia.setCellValueFactory(new PropertyValueFactory<>("data_dostarczenia"));
+        colPoraDostarczenia.setCellValueFactory(new PropertyValueFactory<>("pora_dostarczenia"));
+        colIDKlient.setCellValueFactory(new PropertyValueFactory<>("id_klient"));
+        colIDAdresat.setCellValueFactory(new PropertyValueFactory<>("id_adresat"));
+        colCena.setCellValueFactory(new PropertyValueFactory<>("cena"));
+        colSposobZaplaty.setCellValueFactory(new PropertyValueFactory<>("sposob_zaplaty"));
+        colIDKurier.setCellValueFactory(new PropertyValueFactory<>("id_kurier"));
+        colStatusZamowienia.setCellValueFactory(new PropertyValueFactory<>("status_zamowienia"));
+
         tableOrders.setItems(orderData);
     }
 
     private void populateFlowers(ObservableList<Flower> flowerData){
+        colFlowersID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colFlowersType.setCellValueFactory(new PropertyValueFactory<>("typ"));
+        colFlowerColor.setCellValueFactory(new PropertyValueFactory<>("kolor"));
+        colFlowersPrice.setCellValueFactory(new PropertyValueFactory<>("cena"));
         tableFlowers.setItems(flowerData);
     }
 

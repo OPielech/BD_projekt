@@ -19,6 +19,8 @@ public class MainWindowController {
 
     private Role role;
     private boolean isOpen;
+    private boolean doGoFurther;
+
 
     public Role getRole() {
         return role;
@@ -43,7 +45,7 @@ public class MainWindowController {
         if (!isOpen)
         openPasswordWindow();
 
-        if(!isOpen)
+        if(!isOpen && doGoFurther)
             openCustomerApp();
 
     }
@@ -55,7 +57,7 @@ public class MainWindowController {
         if (!isOpen)
         openPasswordWindow();
 
-        if(!isOpen)
+        if(!isOpen && doGoFurther)
             openEmployeeApp();
 
     }
@@ -76,18 +78,18 @@ public class MainWindowController {
 
             PasswordWindowController passwordWindowController = fxmlLoader.getController();
             Scene scene = new Scene(parent);
-//            scene.getStylesheets().add()
+            scene.getStylesheets().add("/css/PasswordCSS.css");
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Login and password");
             stage.initModality(Modality.WINDOW_MODAL);
             passwordWindowController.setRole(role);
-
             stage.showAndWait();
             isOpen = false;
 
             password = passwordWindowController.getPassword();
             login = passwordWindowController.getLogin();
+            doGoFurther = passwordWindowController.isDoGoFurther();
 
         }catch (IOException e) {
             e.printStackTrace();
@@ -104,6 +106,7 @@ public class MainWindowController {
 
             CustomerAppController customerAppController = fxmlLoader.getController();
             Scene scene = new Scene(parent);
+            scene.getStylesheets().add("/css/CustomerCSS.css");
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Customer application");
@@ -127,6 +130,7 @@ public class MainWindowController {
 
             EmployeeAppController employeeAppController = fxmlLoader.getController();
             Scene scene = new Scene(parent);
+            scene.getStylesheets().add("/css/EmployeeCSS.css");
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Employee application");

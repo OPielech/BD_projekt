@@ -16,6 +16,12 @@ public class PasswordWindowController {
     private String password;
     private boolean isLoginOk;
     private boolean isPasswordOk;
+    private boolean doGoFurther;
+
+    public boolean isDoGoFurther() {
+        return doGoFurther;
+    }
+
     private Role role;
     MainWindowController mainWindowController;
     DataBase dataBase;
@@ -90,6 +96,7 @@ public class PasswordWindowController {
         }
 
         if (isPasswordOk && isLoginOk) {
+            doGoFurther = true;
             Stage stage = (Stage) btnApply.getScene().getWindow();
             stage.close();
         }
