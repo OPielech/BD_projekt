@@ -14,6 +14,9 @@ import org.graalvm.compiler.phases.common.NodeCounterPhase;
 public class MainWindowController {
 
 
+    private String login;
+    private String password;
+
     private Role role;
     private boolean isOpen;
 
@@ -83,6 +86,9 @@ public class MainWindowController {
             stage.showAndWait();
             isOpen = false;
 
+            password = passwordWindowController.getPassword();
+            login = passwordWindowController.getLogin();
+
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -102,6 +108,8 @@ public class MainWindowController {
             stage.setScene(scene);
             stage.setTitle("Customer application");
             stage.initModality(Modality.WINDOW_MODAL);
+            customerAppController.setLogin(login);
+            customerAppController.setPassword(password);
 
             stage.showAndWait();
             isOpen = false;

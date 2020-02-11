@@ -1,6 +1,7 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import com.github.vldrus.sql.rowset.CachedRowSetWrapper;
+
+import javax.sql.rowset.CachedRowSet;
+import java.sql.*;
 
 public class DataBase {
 private String userName;
@@ -33,6 +34,16 @@ private boolean isConnectionOk = false;
 
     }//end of dbConnect
 
+    public void dbDisconnect(){
+        try{
+            if (connection != null && !connection.isClosed()){
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String createURL(){
         StringBuilder urlSB = new StringBuilder("jdbc:mysql://");
         urlSB.append("localhost:3306/");
@@ -45,6 +56,53 @@ private boolean isConnectionOk = false;
         urlSB.append("&serverTimezone=CET");
 
         return urlSB.toString();
+    }
+
+
+    public ResultSet dbExecuteQuery(String queryStmt) throws SQLException {
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        CachedRowSet cachedRowSet = null;
+
+        try{
+
+            dbConnect();
+
+            preparedStatement = connection.prepareStatement(queryStmt);
+            resultSet = preparedStatement.executeQuery(queryStmt);
+            cachedRowSet = new CachedRowSetWrapper();
+            cachedRowSet.populate(resultSet);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            if (resultSet != null){
+                resultSet.close();
+            }
+            if (preparedStatement != null){
+                preparedStatement.close();
+            }
+            dbDisconnect();
+        }
+
+        return cachedRowSet;
+    }
+
+    public void dbExecuteUpdate(String sqlStmt) throws SQLException {
+        Statement statement = null;
+        try {
+            dbConnect();
+            statement = connection.createStatement();
+            statement.executeUpdate(sqlStmt);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            if (statement != null){
+                statement.close();
+            }
+            dbDisconnect();
+        }
     }
 
 }//end of class

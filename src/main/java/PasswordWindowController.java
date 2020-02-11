@@ -63,7 +63,6 @@ public class PasswordWindowController {
         isPasswordOk = false;
 
         dataBase = new DataBase(login, password);
-        System.out.println(role);
 
         try {
             if (role.equals(Role.CUSTOMER) && login.equals("klient")) {

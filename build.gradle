@@ -19,6 +19,9 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2.2'
+    // https://mvnrepository.com/artifact/com.github.vldrus/cachedrowset-wrapper
+    compile group: 'com.github.vldrus', name: 'cachedrowset-wrapper', version: '1.0.2'
+
 }
 test{
     useJUnitPlatform()
