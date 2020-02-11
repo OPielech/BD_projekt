@@ -307,11 +307,12 @@ public class EmployeeAppController {
 
     @FXML
     void btnSumClicked(ActionEvent event) {
-        double sum =0;
+        double sum = 0;
         for (int i=0; i<tableOrders.getItems().size(); i++){
             ObservableValue<String> a= colCena.getCellObservableValue(i);
-            Double b = Double.valueOf(a.getValue());
-            sum+=b;
+            String b = String.valueOf(a.getValue());
+            Double b1 = Double.parseDouble(b);
+            sum+= b1;
         }
         textFieldSum.setText(String.valueOf(sum));
     }
