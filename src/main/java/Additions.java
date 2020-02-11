@@ -1,6 +1,4 @@
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 public class Additions {
 
@@ -8,10 +6,10 @@ public class Additions {
     private StringProperty typ;
     private DoubleProperty cena;
 
-    public Additions(IntegerProperty id, StringProperty typ, DoubleProperty cena) {
-        this.id = id;
-        this.typ = typ;
-        this.cena = cena;
+    public Additions() {
+        id = new SimpleIntegerProperty();
+        typ = new SimpleStringProperty();
+        cena = new SimpleDoubleProperty();
     }
 
     public int getId() {

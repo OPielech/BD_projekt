@@ -198,23 +198,63 @@ public class EmployeeAppController {
     private TextField textFieldSum;
 
     @FXML
-    void btnAddClicked(ActionEvent event) {
+    void btnAddClicked(ActionEvent event) throws SQLException {
+        try{
+            dataBase = new DataBase(login, password);
+            employeeDAO = new EmployeeDAO(dataBase);
+            dataBase.dbConnect();
+            tableAdditions.getItems().clear();
+            ObservableList<Additions> additions = employeeDAO.showAllAdditions();
+            populateAdditions(additions);
 
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 
     @FXML
-    void btnArrClicked(ActionEvent event) {
+    void btnArrClicked(ActionEvent event) throws SQLException {
+        try{
+            dataBase = new DataBase(login, password);
+            employeeDAO = new EmployeeDAO(dataBase);
+            dataBase.dbConnect();
+            tableArragements.getItems().clear();
+            ObservableList<Measurements> measurementsObservableList = employeeDAO.showAllMeasurements();
+            populateMeasurements(measurementsObservableList);
 
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 
     @FXML
-    void btnCliClicked(ActionEvent event) {
+    void btnCliClicked(ActionEvent event) throws SQLException {
+        try{
+            dataBase = new DataBase(login, password);
+            employeeDAO = new EmployeeDAO(dataBase);
+            dataBase.dbConnect();
+//            tableClients.getItems().clear();
+            ObservableList<Customer> customerObservableList = employeeDAO.showAllCustomers();
+            populateCustomer(customerObservableList);
 
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 
     @FXML
-    void btnCouriersClicked(ActionEvent event) {
+    void btnCouriersClicked(ActionEvent event) throws SQLException {
+        try{
+            dataBase = new DataBase(login, password);
+            employeeDAO = new EmployeeDAO(dataBase);
+            dataBase.dbConnect();
+            tableCouriers.getItems().clear();
+            ObservableList<Couriers> couriersObservableList = employeeDAO.showAllCouriers();
+            populateCouriers(couriersObservableList);
 
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 
     @FXML
@@ -249,8 +289,18 @@ public class EmployeeAppController {
     }
 
     @FXML
-    void btnRecClicked(ActionEvent event) {
+    void btnRecClicked(ActionEvent event) throws SQLException {
+        try{
+            dataBase = new DataBase(login, password);
+            employeeDAO = new EmployeeDAO(dataBase);
+            dataBase.dbConnect();
+            tableRecipients.getItems().clear();
+            ObservableList<Recipient> recipientObservableList = employeeDAO.showAllRecipients();
+            populateRecipients(recipientObservableList);
 
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 
     @FXML
@@ -316,6 +366,26 @@ public class EmployeeAppController {
         assert btnSum != null : "fx:id=\"btnSum\" was not injected: check your FXML file 'EmployeeApp.fxml'.";
         assert textFieldSum != null : "fx:id=\"textFieldSum\" was not injected: check your FXML file 'EmployeeApp.fxml'.";
 
+    }
+
+    private void populateCouriers(ObservableList<Couriers> orderData){
+        tableCouriers.setItems(orderData);
+    }
+
+    private void populateMeasurements(ObservableList<Measurements> orderData){
+        tableArragements.setItems(orderData);
+    }
+
+    private void populateAdditions(ObservableList<Additions> orderData){
+        tableAdditions.setItems(orderData);
+    }
+
+    private void populateCustomer(ObservableList<Customer> orderData){
+        tableClients.setItems(orderData);
+    }
+
+    private void populateRecipients(ObservableList<Recipient> orderData){
+        tableRecipients.setItems(orderData);
     }
 
     private void populateOrders(ObservableList<Order> orderData){

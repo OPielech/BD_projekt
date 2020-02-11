@@ -1,4 +1,6 @@
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Customer {
@@ -10,14 +12,14 @@ public class Customer {
     private StringProperty kod_pocztowy;
     private StringProperty miasto;
 
-    public Customer(IntegerProperty id, StringProperty imie, StringProperty nazwisko, StringProperty ulica, StringProperty nr_domu, StringProperty kod_pocztowy, StringProperty miasto) {
-        this.id = id;
-        this.imie = imie;
-        this.nazwisko = nazwisko;
-        this.ulica = ulica;
-        this.nr_domu = nr_domu;
-        this.kod_pocztowy = kod_pocztowy;
-        this.miasto = miasto;
+    public Customer() {
+        id = new SimpleIntegerProperty();
+        imie = new SimpleStringProperty();
+        nazwisko = new SimpleStringProperty();
+        ulica = new SimpleStringProperty();
+        nr_domu = new SimpleStringProperty();
+        kod_pocztowy = new SimpleStringProperty();
+        miasto = new SimpleStringProperty();
     }
 
     public int getId() {

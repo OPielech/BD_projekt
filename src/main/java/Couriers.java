@@ -1,13 +1,15 @@
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Couriers {
     private IntegerProperty id;
     private StringProperty obslugiwane_miasto;
 
-    public Couriers(IntegerProperty id, StringProperty obslugiwane_miasto) {
-        this.id = id;
-        this.obslugiwane_miasto = obslugiwane_miasto;
+    public Couriers() {
+        id = new SimpleIntegerProperty();
+        obslugiwane_miasto = new SimpleStringProperty();
     }
 
     public int getId() {
