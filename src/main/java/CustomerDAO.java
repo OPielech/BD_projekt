@@ -68,20 +68,22 @@ public class CustomerDAO {
         }
     }//end of insertRecipient
 
-    public void insertOrder (String idFlower, String number, int idMeasurements, int idAddition,
-                             String date, String time, int idCustomer, int idRecipient, double Price,
+    public void insertOrder (String idFlower, String number, int idArrangement, String idAddition,
+                             String date, String time, int idCustomer, int idRecipient, double Price, String payment,
                              String status){
 
-        StringBuilder stringBuilder = new StringBuilder("INSERT INTO adresaci(imie, nazwisko, ulica, nr_domu, kod_pocztowy, miasto) VALUES (");
+        StringBuilder stringBuilder = new StringBuilder("INSERT INTO zamowienia(id_kwiat, liczba_sztuk, id_ulozenie" +
+                ", id_dodatek, data_dostarczenia, pora_dostarczenia, id_klient, id_adresat, cena, sposob_zaplaty, status_zamowienia) VALUES (");
         stringBuilder.append("\""+idFlower+"\", ");
         stringBuilder.append("\""+number+"\", ");
-        stringBuilder.append(idMeasurements+", ");
+        stringBuilder.append(idArrangement+", ");
         stringBuilder.append(idAddition+", ");
         stringBuilder.append("\""+date+"\", ");
         stringBuilder.append("\""+time+"\", ");
         stringBuilder.append(idCustomer+", ");
         stringBuilder.append(idRecipient+", ");
         stringBuilder.append(Price+", ");
+        stringBuilder.append("\""+payment+"\", ");
         stringBuilder.append("\""+status+"\");");
 
         String insertStmt = stringBuilder.toString();

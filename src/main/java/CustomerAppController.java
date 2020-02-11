@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.shape.Ellipse;
 import javafx.stage.Stage;
 
 public class CustomerAppController {
@@ -27,22 +28,14 @@ public class CustomerAppController {
         this.password = password;
     }
 
-    private double price;
     private String idFlower1;
     private String idFlower2;
     private String idFlower3;
     private String idFlower4;
 
-    private String numberFlower1;
-    private String numberFlower2;
-    private String numberFlower3;
-    private String numberFlower4;
-
-    private int idArrangement;
-    private int idAddition;
-    private int id = 1;
-    private String orderStatus = "oplacone";
-
+    private String idAdd1;
+    private String idAdd2;
+    private String idAdd3;
 
     private String typeOfFlower1;
     private String typeOfFlower2;
@@ -418,6 +411,14 @@ public class CustomerAppController {
                 isCityReOk && isDateOk && isItemOk) {
 
             try {
+                String idFlowerToConstructor = getIdFlower();
+                String number = getNumber();
+                int idArrangement = getArrangement();
+                String idAddition = getIdAddition();
+                int id = 1;
+                double price = getPrice();
+                String orderStatus = "oplacone";
+
                 isApplied = true;
                 textArea.setText("Order successfully applied!!! \nPress close and make next order");
                 textFieldPrize.setText(String.valueOf(getPrice()));
@@ -425,7 +426,8 @@ public class CustomerAppController {
                 customerDAO = new CustomerDAO(dataBase);
                 dataBase.dbConnect();
                 customerDAO.insertCustomer(nameCu, surnameCu, streetCu, houseNumberCu, postcodeCu, cityCu);
-                customerDAO.insertRecipient(nameRe,surnameRe,streetRe,houseNumberRe,postcodeRe,cityRe);
+                customerDAO.insertRecipient(nameRe, surnameRe, streetRe, houseNumberRe, postcodeRe, cityRe);
+                customerDAO.insertOrder(idFlowerToConstructor, number, idArrangement, idAddition, date, time, id, id, price, paymentMethod, orderStatus);
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -434,243 +436,585 @@ public class CustomerAppController {
 
     }
 
-    public double getPrice(){
+    public double getPrice() {
         double price = 0;
         double[] prices = {5, 3, 2.5, 3, 2, 35, 30, 25, 20, 15, 10};
 
-        if (typeOfFlower1.equals("Rose"))
-            price+=prices[0]*Integer.parseInt(numberOfFlower1);
-        else if(typeOfFlower1.equals("Tulip"))
-            price+=prices[1]*Integer.parseInt(numberOfFlower1);
-        else if(typeOfFlower1.equals("Gillyflower"))
-            price+=prices[2]*Integer.parseInt(numberOfFlower1);
-        else if(typeOfFlower1.equals("Lily"))
-            price+=prices[3]*Integer.parseInt(numberOfFlower1);
-        else
-            price+=prices[4]*Integer.parseInt(numberOfFlower1);
+        try {
+            if (typeOfFlower1.equals("Rose"))
+                price += prices[0] * Integer.parseInt(numberOfFlower1);
+            else if (typeOfFlower1.equals("Tulip"))
+                price += prices[1] * Integer.parseInt(numberOfFlower1);
+            else if (typeOfFlower1.equals("Gillyflower"))
+                price += prices[2] * Integer.parseInt(numberOfFlower1);
+            else if (typeOfFlower1.equals("Lily"))
+                price += prices[3] * Integer.parseInt(numberOfFlower1);
+            else if (typeOfFlower1.equals("Eustoma"))
+                price += prices[4] * Integer.parseInt(numberOfFlower1);
+            else
+                price = price;
+        } catch (NullPointerException e) {
+            price = price;
+        }
 
-        if (typeOfFlower2.equals("Rose"))
-            price+=prices[0]*Integer.parseInt(numberOfFlower2);
-        else if(typeOfFlower2.equals("Tulip"))
-            price+=prices[1]*Integer.parseInt(numberOfFlower2);
-        else if(typeOfFlower2.equals("Gillyflower"))
-            price+=prices[2]*Integer.parseInt(numberOfFlower2);
-        else if(typeOfFlower2.equals("Lily"))
-            price+=prices[3]*Integer.parseInt(numberOfFlower2);
-        else
-            price+=prices[4]*Integer.parseInt(numberOfFlower2);
+        try {
+            if (typeOfFlower2.equals("Rose"))
+                price += prices[0] * Integer.parseInt(numberOfFlower2);
+            else if (typeOfFlower2.equals("Tulip"))
+                price += prices[1] * Integer.parseInt(numberOfFlower2);
+            else if (typeOfFlower2.equals("Gillyflower"))
+                price += prices[2] * Integer.parseInt(numberOfFlower2);
+            else if (typeOfFlower2.equals("Lily"))
+                price += prices[3] * Integer.parseInt(numberOfFlower2);
+            else if (typeOfFlower2.equals("Eustoma"))
+                price += prices[4] * Integer.parseInt(numberOfFlower2);
+            else
+                price = price;
+        } catch (NullPointerException e) {
+            price = price;
+        }
 
-        if (typeOfFlower3.equals("Rose"))
-            price+=prices[0]*Integer.parseInt(numberOfFlower3);
-        else if(typeOfFlower3.equals("Tulip"))
-            price+=prices[1]*Integer.parseInt(numberOfFlower3);
-        else if(typeOfFlower3.equals("Gillyflower"))
-            price+=prices[2]*Integer.parseInt(numberOfFlower3);
-        else if(typeOfFlower3.equals("Lily"))
-            price+=prices[3]*Integer.parseInt(numberOfFlower3);
-        else
-            price+=prices[4]*Integer.parseInt(numberOfFlower3);
+        try {
+            if (typeOfFlower3.equals("Rose"))
+                price += prices[0] * Integer.parseInt(numberOfFlower3);
+            else if (typeOfFlower3.equals("Tulip"))
+                price += prices[1] * Integer.parseInt(numberOfFlower3);
+            else if (typeOfFlower3.equals("Gillyflower"))
+                price += prices[2] * Integer.parseInt(numberOfFlower3);
+            else if (typeOfFlower3.equals("Lily"))
+                price += prices[3] * Integer.parseInt(numberOfFlower3);
+            else if (typeOfFlower3.equals("Eustoma"))
+                price += prices[4] * Integer.parseInt(numberOfFlower3);
+            else
+                price = price;
+        } catch (NullPointerException e) {
+            price = price;
+        }
 
-        if (typeOfFlower4.equals("Rose"))
-            price+=prices[0]*Integer.parseInt(numberOfFlower4);
-        else if(typeOfFlower4.equals("Tulip"))
-            price+=prices[1]*Integer.parseInt(numberOfFlower4);
-        else if(typeOfFlower4.equals("Gillyflower"))
-            price+=prices[2]*Integer.parseInt(numberOfFlower4);
-        else if(typeOfFlower4.equals("Lily"))
-            price+=prices[3]*Integer.parseInt(numberOfFlower4);
-        else
-            price+=prices[4]*Integer.parseInt(numberOfFlower4);
+        try {
+            if (typeOfFlower4.equals("Rose"))
+                price += prices[0] * Integer.parseInt(numberOfFlower4);
+            else if (typeOfFlower4.equals("Tulip"))
+                price += prices[1] * Integer.parseInt(numberOfFlower4);
+            else if (typeOfFlower4.equals("Gillyflower"))
+                price += prices[2] * Integer.parseInt(numberOfFlower4);
+            else if (typeOfFlower4.equals("Lily"))
+                price += prices[3] * Integer.parseInt(numberOfFlower4);
+            else if (typeOfFlower4.equals("Eustoma"))
+                price += prices[4] * Integer.parseInt(numberOfFlower4);
+            else
+                price = price;
+        } catch (NullPointerException e) {
+            price = price;
+        }
 
-        if(arrangement.equals("Basket"))
-            price+=prices[5];
-        else if(arrangement.equals("Vase"))
-            price+=prices[6];
+        try {
+            if (arrangement.equals("Basket"))
+                price += prices[5];
+            else if (arrangement.equals("Vase"))
+                price += prices[6];
+            else
+                price = price;
+        } catch (NullPointerException e) {
+            price = price;
+        }
 
-        if (addition1.equals("Chocolates"))
-            price+=prices[7];
-        else if(addition1.equals("Red Wine"))
-            price+=prices[8];
-        else if(addition1.equals("White Wine"))
-            price+=prices[8];
-        else if(addition1.equals("Sparkling Wine"))
-            price+=prices[8];
-        else if(addition1.equals("Teddy bear"))
-            price+=prices[7];
-        else if(addition1.equals("Balloon"))
-            price+=prices[9];
-        else if(addition1.equals("Coffee"))
-            price+=prices[7];
-        else if(addition1.equals("Name card"))
-            price+=prices[10];
-        else if(addition1.equals("Birthday card"))
-            price+=prices[10];
-        else
-            price+=prices[10];
+        try {
+            if (addition1.equals("Chocolates"))
+                price += prices[7];
+            else if (addition1.equals("Red Wine"))
+                price += prices[8];
+            else if (addition1.equals("White Wine"))
+                price += prices[8];
+            else if (addition1.equals("Sparkling Wine"))
+                price += prices[8];
+            else if (addition1.equals("Teddy bear"))
+                price += prices[7];
+            else if (addition1.equals("Balloon"))
+                price += prices[9];
+            else if (addition1.equals("Coffee"))
+                price += prices[7];
+            else if (addition1.equals("Name card"))
+                price += prices[10];
+            else if (addition1.equals("Birthday card"))
+                price += prices[10];
+            else if (addition1.equals("Wedding card"))
+                price += prices[10];
+            else
+                price = price;
+        } catch (NullPointerException e) {
+            price = price;
+        }
 
-        if(time.equals("18 - 22"))
-            price+=prices[1];
+
+        try {
+            if (addition2.equals("Chocolates"))
+                price += prices[7];
+            else if (addition2.equals("Red Wine"))
+                price += prices[8];
+            else if (addition2.equals("White Wine"))
+                price += prices[8];
+            else if (addition2.equals("Sparkling Wine"))
+                price += prices[8];
+            else if (addition2.equals("Teddy bear"))
+                price += prices[7];
+            else if (addition2.equals("Balloon"))
+                price += prices[9];
+            else if (addition2.equals("Coffee"))
+                price += prices[7];
+            else if (addition2.equals("Name card"))
+                price += prices[10];
+            else if (addition2.equals("Birthday card"))
+                price += prices[10];
+            else if (addition2.equals("Wedding card"))
+                price += prices[10];
+            else
+                price = price;
+        } catch (NullPointerException e) {
+            price = price;
+        }
+
+        try {
+            if (addition3.equals("Chocolates"))
+                price += prices[7];
+            else if (addition3.equals("Red Wine"))
+                price += prices[8];
+            else if (addition3.equals("White Wine"))
+                price += prices[8];
+            else if (addition3.equals("Sparkling Wine"))
+                price += prices[8];
+            else if (addition3.equals("Teddy bear"))
+                price += prices[7];
+            else if (addition3.equals("Balloon"))
+                price += prices[9];
+            else if (addition3.equals("Coffee"))
+                price += prices[7];
+            else if (addition3.equals("Name card"))
+                price += prices[10];
+            else if (addition3.equals("Birthday card"))
+                price += prices[10];
+            else if (addition3.equals("Wedding card"))
+                price += prices[10];
+            else
+                price = price;
+        } catch (NullPointerException e) {
+            price = price;
+        }
+
+        if (time.equals("18 - 22"))
+            price += prices[1];
 
         return price;
     }
 
-    public String getIdFlower(){
-        if (typeOfFlower1.equals("Rose") && colorOfFlower1.equals("Red"))
-            idFlower1 = "1";
-        else if (typeOfFlower1.equals("Rose") && colorOfFlower1.equals("White"))
-            idFlower1 = "2";
-        else if (typeOfFlower1.equals("Rose") && colorOfFlower1.equals("Orange"))
-            idFlower1 = "3";
-        else if (typeOfFlower1.equals("Rose") && colorOfFlower1.equals("Yellow"))
-            idFlower1 = "4";
-        else if (typeOfFlower1.equals("Rose") && colorOfFlower1.equals("Pink"))
-            idFlower1 = "5";
-        else if (typeOfFlower1.equals("Tulip") && colorOfFlower1.equals("Red"))
-            idFlower1 = "6";
-        else if (typeOfFlower1.equals("Tulip") && colorOfFlower1.equals("White"))
-            idFlower1 = "7";
-        else if (typeOfFlower1.equals("Tulip") && colorOfFlower1.equals("Orange"))
-            idFlower1 = "8";
-        else if (typeOfFlower1.equals("Tulip") && colorOfFlower1.equals("Yellow"))
-            idFlower1 = "9";
-        else if (typeOfFlower1.equals("Tulip") && colorOfFlower1.equals("Pink"))
-            idFlower1 = "10";
-        else if (typeOfFlower1.equals("Gillyflower") && colorOfFlower1.equals("Red"))
-            idFlower1 = "11";
-        else if (typeOfFlower1.equals("Gillyflower") && colorOfFlower1.equals("White"))
-            idFlower1 = "12";
-        else if (typeOfFlower1.equals("Gillyflower") && colorOfFlower1.equals("Orange"))
-            idFlower1 = "13";
-        else if (typeOfFlower1.equals("Gillyflower") && colorOfFlower1.equals("Yellow"))
-            idFlower1 = "14";
-        else if (typeOfFlower1.equals("Gillyflower") && colorOfFlower1.equals("Pink"))
-            idFlower1 = "15";
-        else if (typeOfFlower1.equals("Lily") && colorOfFlower1.equals("Red"))
-            idFlower1 = "16";
-        else if (typeOfFlower1.equals("Lily") && colorOfFlower1.equals("White"))
-            idFlower1 = "17";
-        else if (typeOfFlower1.equals("Lily") && colorOfFlower1.equals("Orange"))
-            idFlower1 = "18";
-        else if (typeOfFlower1.equals("Lily") && colorOfFlower1.equals("Yellow"))
-            idFlower1 = "19";
-        else if (typeOfFlower1.equals("Lily") && colorOfFlower1.equals("Pink"))
-            idFlower1 = "20";
-        else if (typeOfFlower1.equals("Eustoma") && colorOfFlower1.equals("Red"))
-            idFlower1 = "21";
-        else if (typeOfFlower1.equals("Eustoma") && colorOfFlower1.equals("White"))
-            idFlower1 = "22";
-        else if (typeOfFlower1.equals("Eustoma") && colorOfFlower1.equals("Orange"))
-            idFlower1 = "23";
-        else if (typeOfFlower1.equals("Eustoma") && colorOfFlower1.equals("Yellow"))
-            idFlower1 = "24";
+    public String getIdFlower() {
+
+        String idFlower;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        try {
+            if (typeOfFlower1.equals("Rose") && colorOfFlower1.equals("Red"))
+                idFlower1 = "1";
+            else if (typeOfFlower1.equals("Rose") && colorOfFlower1.equals("White"))
+                idFlower1 = "2";
+            else if (typeOfFlower1.equals("Rose") && colorOfFlower1.equals("Orange"))
+                idFlower1 = "3";
+            else if (typeOfFlower1.equals("Rose") && colorOfFlower1.equals("Yellow"))
+                idFlower1 = "4";
+            else if (typeOfFlower1.equals("Rose") && colorOfFlower1.equals("Pink"))
+                idFlower1 = "5";
+            else if (typeOfFlower1.equals("Tulip") && colorOfFlower1.equals("Red"))
+                idFlower1 = "6";
+            else if (typeOfFlower1.equals("Tulip") && colorOfFlower1.equals("White"))
+                idFlower1 = "7";
+            else if (typeOfFlower1.equals("Tulip") && colorOfFlower1.equals("Orange"))
+                idFlower1 = "8";
+            else if (typeOfFlower1.equals("Tulip") && colorOfFlower1.equals("Yellow"))
+                idFlower1 = "9";
+            else if (typeOfFlower1.equals("Tulip") && colorOfFlower1.equals("Pink"))
+                idFlower1 = "10";
+            else if (typeOfFlower1.equals("Gillyflower") && colorOfFlower1.equals("Red"))
+                idFlower1 = "11";
+            else if (typeOfFlower1.equals("Gillyflower") && colorOfFlower1.equals("White"))
+                idFlower1 = "12";
+            else if (typeOfFlower1.equals("Gillyflower") && colorOfFlower1.equals("Orange"))
+                idFlower1 = "13";
+            else if (typeOfFlower1.equals("Gillyflower") && colorOfFlower1.equals("Yellow"))
+                idFlower1 = "14";
+            else if (typeOfFlower1.equals("Gillyflower") && colorOfFlower1.equals("Pink"))
+                idFlower1 = "15";
+            else if (typeOfFlower1.equals("Lily") && colorOfFlower1.equals("Red"))
+                idFlower1 = "16";
+            else if (typeOfFlower1.equals("Lily") && colorOfFlower1.equals("White"))
+                idFlower1 = "17";
+            else if (typeOfFlower1.equals("Lily") && colorOfFlower1.equals("Orange"))
+                idFlower1 = "18";
+            else if (typeOfFlower1.equals("Lily") && colorOfFlower1.equals("Yellow"))
+                idFlower1 = "19";
+            else if (typeOfFlower1.equals("Lily") && colorOfFlower1.equals("Pink"))
+                idFlower1 = "20";
+            else if (typeOfFlower1.equals("Eustoma") && colorOfFlower1.equals("Red"))
+                idFlower1 = "21";
+            else if (typeOfFlower1.equals("Eustoma") && colorOfFlower1.equals("White"))
+                idFlower1 = "22";
+            else if (typeOfFlower1.equals("Eustoma") && colorOfFlower1.equals("Orange"))
+                idFlower1 = "23";
+            else if (typeOfFlower1.equals("Eustoma") && colorOfFlower1.equals("Yellow"))
+                idFlower1 = "24";
+            else if (typeOfFlower1.equals("Eustoma") && colorOfFlower1.equals("Pink"))
+                idFlower1 = "25";
+            else
+                idFlower1 = "0";
+        } catch (NullPointerException e) {
+            idFlower1 = "0";
+        }
+
+        try {
+            if (typeOfFlower2.equals("Rose") && colorOfFlower2.equals("Red"))
+                idFlower2 = "1";
+            else if (typeOfFlower2.equals("Rose") && colorOfFlower2.equals("White"))
+                idFlower2 = "2";
+            else if (typeOfFlower2.equals("Rose") && colorOfFlower2.equals("Orange"))
+                idFlower2 = "3";
+            else if (typeOfFlower2.equals("Rose") && colorOfFlower2.equals("Yellow"))
+                idFlower2 = "4";
+            else if (typeOfFlower2.equals("Rose") && colorOfFlower2.equals("Pink"))
+                idFlower2 = "5";
+            else if (typeOfFlower2.equals("Tulip") && colorOfFlower2.equals("Red"))
+                idFlower2 = "6";
+            else if (typeOfFlower2.equals("Tulip") && colorOfFlower2.equals("White"))
+                idFlower2 = "7";
+            else if (typeOfFlower2.equals("Tulip") && colorOfFlower2.equals("Orange"))
+                idFlower2 = "8";
+            else if (typeOfFlower2.equals("Tulip") && colorOfFlower2.equals("Yellow"))
+                idFlower2 = "9";
+            else if (typeOfFlower2.equals("Tulip") && colorOfFlower2.equals("Pink"))
+                idFlower2 = "10";
+            else if (typeOfFlower2.equals("Gillyflower") && colorOfFlower2.equals("Red"))
+                idFlower2 = "11";
+            else if (typeOfFlower2.equals("Gillyflower") && colorOfFlower2.equals("White"))
+                idFlower2 = "12";
+            else if (typeOfFlower2.equals("Gillyflower") && colorOfFlower2.equals("Orange"))
+                idFlower2 = "13";
+            else if (typeOfFlower2.equals("Gillyflower") && colorOfFlower2.equals("Yellow"))
+                idFlower2 = "14";
+            else if (typeOfFlower2.equals("Gillyflower") && colorOfFlower2.equals("Pink"))
+                idFlower2 = "15";
+            else if (typeOfFlower2.equals("Lily") && colorOfFlower2.equals("Red"))
+                idFlower2 = "16";
+            else if (typeOfFlower2.equals("Lily") && colorOfFlower2.equals("White"))
+                idFlower2 = "17";
+            else if (typeOfFlower2.equals("Lily") && colorOfFlower2.equals("Orange"))
+                idFlower2 = "18";
+            else if (typeOfFlower2.equals("Lily") && colorOfFlower2.equals("Yellow"))
+                idFlower2 = "19";
+            else if (typeOfFlower2.equals("Lily") && colorOfFlower2.equals("Pink"))
+                idFlower2 = "20";
+            else if (typeOfFlower2.equals("Eustoma") && colorOfFlower2.equals("Red"))
+                idFlower2 = "21";
+            else if (typeOfFlower2.equals("Eustoma") && colorOfFlower2.equals("White"))
+                idFlower2 = "22";
+            else if (typeOfFlower2.equals("Eustoma") && colorOfFlower2.equals("Orange"))
+                idFlower2 = "23";
+            else if (typeOfFlower2.equals("Eustoma") && colorOfFlower2.equals("Yellow"))
+                idFlower2 = "24";
+            else if (typeOfFlower2.equals("Eustoma") && colorOfFlower2.equals("Pink"))
+                idFlower2 = "25";
+            else
+                idFlower2 = "0";
+        } catch (NullPointerException e) {
+            idFlower2 = "0";
+        }
+
+
+        try {
+            if (typeOfFlower3.equals("Rose") && colorOfFlower3.equals("Red"))
+                idFlower3 = "1";
+            else if (typeOfFlower3.equals("Rose") && colorOfFlower3.equals("White"))
+                idFlower3 = "2";
+            else if (typeOfFlower3.equals("Rose") && colorOfFlower3.equals("Orange"))
+                idFlower3 = "3";
+            else if (typeOfFlower3.equals("Rose") && colorOfFlower3.equals("Yellow"))
+                idFlower3 = "4";
+            else if (typeOfFlower3.equals("Rose") && colorOfFlower3.equals("Pink"))
+                idFlower3 = "5";
+            else if (typeOfFlower3.equals("Tulip") && colorOfFlower3.equals("Red"))
+                idFlower3 = "6";
+            else if (typeOfFlower3.equals("Tulip") && colorOfFlower3.equals("White"))
+                idFlower3 = "7";
+            else if (typeOfFlower3.equals("Tulip") && colorOfFlower3.equals("Orange"))
+                idFlower3 = "8";
+            else if (typeOfFlower3.equals("Tulip") && colorOfFlower3.equals("Yellow"))
+                idFlower3 = "9";
+            else if (typeOfFlower3.equals("Tulip") && colorOfFlower3.equals("Pink"))
+                idFlower3 = "10";
+            else if (typeOfFlower3.equals("Gillyflower") && colorOfFlower3.equals("Red"))
+                idFlower3 = "11";
+            else if (typeOfFlower3.equals("Gillyflower") && colorOfFlower3.equals("White"))
+                idFlower3 = "12";
+            else if (typeOfFlower3.equals("Gillyflower") && colorOfFlower3.equals("Orange"))
+                idFlower3 = "13";
+            else if (typeOfFlower3.equals("Gillyflower") && colorOfFlower3.equals("Yellow"))
+                idFlower3 = "14";
+            else if (typeOfFlower3.equals("Gillyflower") && colorOfFlower3.equals("Pink"))
+                idFlower3 = "15";
+            else if (typeOfFlower3.equals("Lily") && colorOfFlower3.equals("Red"))
+                idFlower3 = "16";
+            else if (typeOfFlower3.equals("Lily") && colorOfFlower3.equals("White"))
+                idFlower3 = "17";
+            else if (typeOfFlower3.equals("Lily") && colorOfFlower3.equals("Orange"))
+                idFlower3 = "18";
+            else if (typeOfFlower3.equals("Lily") && colorOfFlower3.equals("Yellow"))
+                idFlower3 = "19";
+            else if (typeOfFlower3.equals("Lily") && colorOfFlower3.equals("Pink"))
+                idFlower3 = "20";
+            else if (typeOfFlower3.equals("Eustoma") && colorOfFlower3.equals("Red"))
+                idFlower3 = "21";
+            else if (typeOfFlower3.equals("Eustoma") && colorOfFlower3.equals("White"))
+                idFlower3 = "22";
+            else if (typeOfFlower3.equals("Eustoma") && colorOfFlower3.equals("Orange"))
+                idFlower3 = "23";
+            else if (typeOfFlower3.equals("Eustoma") && colorOfFlower3.equals("Yellow"))
+                idFlower3 = "24";
+            else if (typeOfFlower3.equals("Eustoma") && colorOfFlower3.equals("Pink"))
+                idFlower3 = "25";
+            else
+                idFlower3 = "0";
+        } catch (NullPointerException e) {
+            idFlower3 = "0";
+        }
+
+        try {
+            if (typeOfFlower4.equals("Rose") && colorOfFlower4.equals("Red"))
+                idFlower4 = "1";
+            else if (typeOfFlower4.equals("Rose") && colorOfFlower4.equals("White"))
+                idFlower4 = "2";
+            else if (typeOfFlower4.equals("Rose") && colorOfFlower4.equals("Orange"))
+                idFlower4 = "3";
+            else if (typeOfFlower4.equals("Rose") && colorOfFlower4.equals("Yellow"))
+                idFlower4 = "4";
+            else if (typeOfFlower4.equals("Rose") && colorOfFlower4.equals("Pink"))
+                idFlower4 = "5";
+            else if (typeOfFlower4.equals("Tulip") && colorOfFlower4.equals("Red"))
+                idFlower4 = "6";
+            else if (typeOfFlower4.equals("Tulip") && colorOfFlower4.equals("White"))
+                idFlower4 = "7";
+            else if (typeOfFlower4.equals("Tulip") && colorOfFlower4.equals("Orange"))
+                idFlower4 = "8";
+            else if (typeOfFlower4.equals("Tulip") && colorOfFlower4.equals("Yellow"))
+                idFlower4 = "9";
+            else if (typeOfFlower4.equals("Tulip") && colorOfFlower4.equals("Pink"))
+                idFlower4 = "10";
+            else if (typeOfFlower4.equals("Gillyflower") && colorOfFlower4.equals("Red"))
+                idFlower4 = "11";
+            else if (typeOfFlower4.equals("Gillyflower") && colorOfFlower4.equals("White"))
+                idFlower4 = "12";
+            else if (typeOfFlower4.equals("Gillyflower") && colorOfFlower4.equals("Orange"))
+                idFlower4 = "13";
+            else if (typeOfFlower4.equals("Gillyflower") && colorOfFlower4.equals("Yellow"))
+                idFlower4 = "14";
+            else if (typeOfFlower4.equals("Gillyflower") && colorOfFlower4.equals("Pink"))
+                idFlower4 = "15";
+            else if (typeOfFlower4.equals("Lily") && colorOfFlower4.equals("Red"))
+                idFlower4 = "16";
+            else if (typeOfFlower4.equals("Lily") && colorOfFlower4.equals("White"))
+                idFlower4 = "17";
+            else if (typeOfFlower4.equals("Lily") && colorOfFlower4.equals("Orange"))
+                idFlower4 = "18";
+            else if (typeOfFlower4.equals("Lily") && colorOfFlower4.equals("Yellow"))
+                idFlower4 = "19";
+            else if (typeOfFlower4.equals("Lily") && colorOfFlower4.equals("Pink"))
+                idFlower4 = "20";
+            else if (typeOfFlower4.equals("Eustoma") && colorOfFlower4.equals("Red"))
+                idFlower4 = "21";
+            else if (typeOfFlower4.equals("Eustoma") && colorOfFlower4.equals("White"))
+                idFlower4 = "22";
+            else if (typeOfFlower4.equals("Eustoma") && colorOfFlower4.equals("Orange"))
+                idFlower4 = "23";
+            else if (typeOfFlower4.equals("Eustoma") && colorOfFlower4.equals("Yellow"))
+                idFlower4 = "24";
+            else if (typeOfFlower4.equals("Eustoma") && colorOfFlower4.equals("Pink"))
+                idFlower4 = "25";
+            else
+                idFlower4 = "0";
+        } catch (NullPointerException e) {
+            idFlower4 = "0";
+        }
+
+        stringBuilder.append(idFlower1);
+        stringBuilder.append("| ");
+        stringBuilder.append(idFlower2);
+        stringBuilder.append("| ");
+        stringBuilder.append(idFlower3);
+        stringBuilder.append("| ");
+        stringBuilder.append(idFlower4);
+
+        idFlower = stringBuilder.toString();
+
+        return idFlower;
+    }
+
+    public String getNumber() {
+        StringBuilder stringBuilder = new StringBuilder();
+        String number;
+
+        try {
+            if (numberOfFlower1.isEmpty())
+                throw new NullPointerException();
+            else {
+            }
+        } catch (NullPointerException e) {
+            numberOfFlower1 = "0";
+        }
+
+        try {
+            if (numberOfFlower2.isEmpty())
+                throw new NullPointerException();
+            else {
+            }
+        } catch (NullPointerException e) {
+            numberOfFlower2 = "0";
+        }
+
+        try {
+            if (numberOfFlower3.isEmpty())
+                throw new NullPointerException();
+            else {
+            }
+        } catch (NullPointerException e) {
+            numberOfFlower3 = "0";
+        }
+
+        try {
+            if (numberOfFlower4.isEmpty())
+                throw new NullPointerException();
+            else {
+            }
+        } catch (NullPointerException e) {
+            numberOfFlower4 = "0";
+        }
+        stringBuilder.append(numberOfFlower1);
+        stringBuilder.append("| ");
+        stringBuilder.append(numberOfFlower2);
+        stringBuilder.append("| ");
+        stringBuilder.append(numberOfFlower3);
+        stringBuilder.append("| ");
+        stringBuilder.append(numberOfFlower4);
+
+        number = stringBuilder.toString();
+
+        return number;
+    }
+
+    public String getIdAddition() {
+        String idAddition;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        try {
+            if (addition1.equals("Chocolates"))
+                idAdd1 = "1";
+            else if (addition1.equals("Red Wine"))
+                idAdd1 = "2";
+            else if (addition1.equals("White Wine"))
+                idAdd1 = "3";
+            else if (addition1.equals("Sparkling Wine"))
+                idAdd1 = "4";
+            else if (addition1.equals("Teddy bear"))
+                idAdd1 = "5";
+            else if (addition1.equals("Balloon"))
+                idAdd1 = "6";
+            else if (addition1.equals("Coffee"))
+                idAdd1 = "7";
+            else if (addition1.equals("Name card"))
+                idAdd1 = "8";
+            else if (addition1.equals("Birthday card"))
+                idAdd1 = "9";
+            else if (addition1.equals("Wedding card"))
+                idAdd1 = "10";
+            else
+                idAdd1 = "0";
+        } catch (NullPointerException e) {
+            idAdd1 = "0";
+        }
+
+        try {
+            if (addition2.equals("Chocolates"))
+                idAdd2 = "1";
+            else if (addition2.equals("Red Wine"))
+                idAdd2 = "2";
+            else if (addition2.equals("White Wine"))
+                idAdd2 = "3";
+            else if (addition2.equals("Sparkling Wine"))
+                idAdd2 = "4";
+            else if (addition2.equals("Teddy bear"))
+                idAdd2 = "5";
+            else if (addition2.equals("Balloon"))
+                idAdd2 = "6";
+            else if (addition2.equals("Coffee"))
+                idAdd2 = "7";
+            else if (addition2.equals("Name card"))
+                idAdd2 = "8";
+            else if (addition2.equals("Birthday card"))
+                idAdd2 = "9";
+            else if (addition2.equals("Wedding card"))
+                idAdd2 = "10";
+            else
+                idAdd2 = "0";
+        } catch (NullPointerException e) {
+            idAdd2 = "0";
+        }
+
+        try {
+            if (addition3.equals("Chocolates"))
+                idAdd3 = "1";
+            else if (addition3.equals("Red Wine"))
+                idAdd3 = "2";
+            else if (addition3.equals("White Wine"))
+                idAdd3 = "3";
+            else if (addition3.equals("Sparkling Wine"))
+                idAdd3 = "4";
+            else if (addition3.equals("Teddy bear"))
+                idAdd3 = "5";
+            else if (addition3.equals("Balloon"))
+                idAdd3 = "6";
+            else if (addition3.equals("Coffee"))
+                idAdd3 = "7";
+            else if (addition3.equals("Name card"))
+                idAdd3 = "8";
+            else if (addition3.equals("Birthday card"))
+                idAdd3 = "9";
+            else if (addition3.equals("Wedding card"))
+                idAdd3 = "10";
+            else
+                idAdd3 = "0";
+        } catch (NullPointerException e) {
+            idAdd3 = "0";
+        }
+
+        stringBuilder.append(idAdd1);
+        stringBuilder.append("| ");
+        stringBuilder.append(idAdd2);
+        stringBuilder.append("| ");
+        stringBuilder.append(idAdd3);
+
+        idAddition = stringBuilder.toString();
+
+        return idAddition;
+    }
+
+    public int getArrangement() {
+
+        int id;
+        if (arrangement.equals("Round"))
+            id = 1;
+        else if (arrangement.equals("Gradation"))
+            id = 2;
+        else if (arrangement.equals("Basket"))
+            id = 3;
         else
-            idFlower1 = "25";
+            id = 4;
 
-        if (typeOfFlower2.equals("Rose") && colorOfFlower2.equals("Red"))
-            idFlower2 = "1";
-        else if (typeOfFlower2.equals("Rose") && colorOfFlower2.equals("White"))
-            idFlower2 = "2";
-        else if (typeOfFlower2.equals("Rose") && colorOfFlower2.equals("Orange"))
-            idFlower2 = "3";
-        else if (typeOfFlower2.equals("Rose") && colorOfFlower2.equals("Yellow"))
-            idFlower2 = "4";
-        else if (typeOfFlower2.equals("Rose") && colorOfFlower2.equals("Pink"))
-            idFlower2 = "5";
-        else if (typeOfFlower2.equals("Tulip") && colorOfFlower2.equals("Red"))
-            idFlower2 = "6";
-        else if (typeOfFlower2.equals("Tulip") && colorOfFlower2.equals("White"))
-            idFlower2 = "7";
-        else if (typeOfFlower2.equals("Tulip") && colorOfFlower2.equals("Orange"))
-            idFlower2 = "8";
-        else if (typeOfFlower2.equals("Tulip") && colorOfFlower2.equals("Yellow"))
-            idFlower2 = "9";
-        else if (typeOfFlower2.equals("Tulip") && colorOfFlower2.equals("Pink"))
-            idFlower2 = "10";
-        else if (typeOfFlower2.equals("Gillyflower") && colorOfFlower2.equals("Red"))
-            idFlower2 = "11";
-        else if (typeOfFlower2.equals("Gillyflower") && colorOfFlower2.equals("White"))
-            idFlower2 = "12";
-        else if (typeOfFlower2.equals("Gillyflower") && colorOfFlower2.equals("Orange"))
-            idFlower2 = "13";
-        else if (typeOfFlower2.equals("Gillyflower") && colorOfFlower2.equals("Yellow"))
-            idFlower2 = "14";
-        else if (typeOfFlower2.equals("Gillyflower") && colorOfFlower2.equals("Pink"))
-            idFlower2 = "15";
-        else if (typeOfFlower2.equals("Lily") && colorOfFlower2.equals("Red"))
-            idFlower2 = "16";
-        else if (typeOfFlower2.equals("Lily") && colorOfFlower2.equals("White"))
-            idFlower2 = "17";
-        else if (typeOfFlower2.equals("Lily") && colorOfFlower2.equals("Orange"))
-            idFlower2 = "18";
-        else if (typeOfFlower2.equals("Lily") && colorOfFlower2.equals("Yellow"))
-            idFlower2 = "19";
-        else if (typeOfFlower2.equals("Lily") && colorOfFlower2.equals("Pink"))
-            idFlower2 = "20";
-        else if (typeOfFlower2.equals("Eustoma") && colorOfFlower2.equals("Red"))
-            idFlower2 = "21";
-        else if (typeOfFlower2.equals("Eustoma") && colorOfFlower2.equals("White"))
-            idFlower2 = "22";
-        else if (typeOfFlower2.equals("Eustoma") && colorOfFlower2.equals("Orange"))
-            idFlower2 = "23";
-        else if (typeOfFlower2.equals("Eustoma") && colorOfFlower2.equals("Yellow"))
-            idFlower2 = "24";
-        else
-            idFlower2 = "25";
-
-
-        if (typeOfFlower3.equals("Rose") && colorOfFlower3.equals("Red"))
-            idFlower3 = "1";
-        else if (typeOfFlower3.equals("Rose") && colorOfFlower3.equals("White"))
-            idFlower3 = "2";
-        else if (typeOfFlower3.equals("Rose") && colorOfFlower3.equals("Orange"))
-            idFlower3 = "3";
-        else if (typeOfFlower3.equals("Rose") && colorOfFlower3.equals("Yellow"))
-            idFlower3 = "4";
-        else if (typeOfFlower3.equals("Rose") && colorOfFlower3.equals("Pink"))
-            idFlower3 = "5";
-        else if (typeOfFlower3.equals("Tulip") && colorOfFlower3.equals("Red"))
-            idFlower3 = "6";
-        else if (typeOfFlower3.equals("Tulip") && colorOfFlower3.equals("White"))
-            idFlower3 = "7";
-        else if (typeOfFlower3.equals("Tulip") && colorOfFlower3.equals("Orange"))
-            idFlower3 = "8";
-        else if (typeOfFlower3.equals("Tulip") && colorOfFlower3.equals("Yellow"))
-            idFlower3 = "9";
-        else if (typeOfFlower3.equals("Tulip") && colorOfFlower3.equals("Pink"))
-            idFlower3 = "10";
-        else if (typeOfFlower3.equals("Gillyflower") && colorOfFlower3.equals("Red"))
-            idFlower3 = "11";
-        else if (typeOfFlower3.equals("Gillyflower") && colorOfFlower3.equals("White"))
-            idFlower3 = "12";
-        else if (typeOfFlower3.equals("Gillyflower") && colorOfFlower3.equals("Orange"))
-            idFlower3 = "13";
-        else if (typeOfFlower3.equals("Gillyflower") && colorOfFlower3.equals("Yellow"))
-            idFlower3 = "14";
-        else if (typeOfFlower3.equals("Gillyflower") && colorOfFlower3.equals("Pink"))
-            idFlower3 = "15";
-        else if (typeOfFlower3.equals("Lily") && colorOfFlower3.equals("Red"))
-            idFlower3 = "16";
-        else if (typeOfFlower3.equals("Lily") && colorOfFlower3.equals("White"))
-            idFlower3 = "17";
-        else if (typeOfFlower3.equals("Lily") && colorOfFlower3.equals("Orange"))
-            idFlower3 = "18";
-        else if (typeOfFlower3.equals("Lily") && colorOfFlower3.equals("Yellow"))
-            idFlower3 = "19";
-        else if (typeOfFlower3.equals("Lily") && colorOfFlower3.equals("Pink"))
-            idFlower3 = "20";
-        else if (typeOfFlower3.equals("Eustoma") && colorOfFlower3.equals("Red"))
-            idFlower3 = "21";
-        else if (typeOfFlower3.equals("Eustoma") && colorOfFlower3.equals("White"))
-            idFlower3 = "22";
-        else if (typeOfFlower3.equals("Eustoma") && colorOfFlower3.equals("Orange"))
-            idFlower3 = "23";
-        else if (typeOfFlower3.equals("Eustoma") && colorOfFlower3.equals("Yellow"))
-            idFlower3 = "24";
-        else
-            idFlower3 = "25";
-
-
-        return null;
+        return id;
     }
 
 }//end of class

@@ -1,14 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.EmployeeApp"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="664.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EmployeeAppController">
+   <children>
+      <TableView fx:id="tableOrders" layoutX="14.0" layoutY="364.0" prefHeight="245.0" prefWidth="1122.0">
+        <columns>
+          <TableColumn fx:id="colID" prefWidth="40.0" text="ID" />
+          <TableColumn fx:id="colIDKwiat" prefWidth="74.0" text="id_kwiat" />
+            <TableColumn fx:id="colLiczbaSztuk" prefWidth="77.0" text="liczba_sztuk" />
+            <TableColumn fx:id="colIDUlozenie" prefWidth="92.0" text="id_ulozenie" />
+            <TableColumn fx:id="colIDDodatek" prefWidth="87.0" text="id_dodatek" />
+            <TableColumn fx:id="colDataDostarczenia" prefWidth="116.0" text="data_dostarczenia" />
+            <TableColumn fx:id="colPoraDostarczenia" prefWidth="114.0" text="pora_dostarczenia" />
+            <TableColumn fx:id="colIDKlient" minWidth="0.0" prefWidth="64.0" text="id_klient" />
+            <TableColumn fx:id="colIDAdresat" prefWidth="75.0" text="id_adresat" />
+            <TableColumn fx:id="colCena" prefWidth="61.0" text="cena" />
+            <TableColumn fx:id="colSposobZaplaty" prefWidth="102.0" text="sposob_zaplaty" />
+            <TableColumn fx:id="colIDKurier" prefWidth="92.0" text="id_kurier" />
+            <TableColumn fx:id="colStatusZamowienia" prefWidth="126.0" text="status_zamowienia" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tableFlowers" layoutX="728.0" layoutY="16.0" prefHeight="316.0" prefWidth="218.0">
+        <columns>
+          <TableColumn fx:id="colFlowersID" prefWidth="41.0" text="ID" />
+          <TableColumn fx:id="colFlowersType" prefWidth="67.0" text="typ" />
+            <TableColumn fx:id="colFlowerColor" prefWidth="68.0" text="kolor" />
+            <TableColumn fx:id="colFlowersPrice" prefWidth="40.0" text="cena" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tableCouriers" layoutX="956.0" layoutY="16.0" prefHeight="316.0" prefWidth="179.0">
+        <columns>
+          <TableColumn fx:id="colCouriersID" prefWidth="38.0" text="ID" />
+          <TableColumn fx:id="colCouriersCity" prefWidth="139.0" text="obslugiwane_miasto" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tableArragements" layoutX="552.0" layoutY="16.0" prefHeight="141.0" prefWidth="165.0">
+        <columns>
+          <TableColumn fx:id="colArrID" prefWidth="31.0" text="ID" />
+          <TableColumn fx:id="colArrType" prefWidth="90.0" text="typ" />
+            <TableColumn fx:id="colArrPrice" prefWidth="43.0" text="cena" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tableAdditions" layoutX="552.0" layoutY="172.0" prefHeight="160.0" prefWidth="165.0">
+        <columns>
+          <TableColumn fx:id="colAddID" prefWidth="32.0" text="ID" />
+          <TableColumn fx:id="colAddType" prefWidth="93.0" text="typ" />
+            <TableColumn fx:id="colAddPrice" prefWidth="39.0" text="cena" />
+        </columns>
+      </TableView>
+      <TableView layoutX="112.0" layoutY="16.0" prefHeight="141.0" prefWidth="426.0">
+        <columns>
+          <TableColumn prefWidth="27.0" text="ID" />
+          <TableColumn prefWidth="43.0" text="imie" />
+            <TableColumn prefWidth="61.0" text="nazwisko" />
+            <TableColumn prefWidth="57.0" text="ulica" />
+            <TableColumn minWidth="6.0" prefWidth="68.0" text="nr_domu" />
+            <TableColumn prefWidth="86.0" text="kod_pocztowy" />
+            <TableColumn prefWidth="83.0" text="miasto" />
+        </columns>
+      </TableView>
+      <TableView layoutX="112.0" layoutY="173.0" prefHeight="160.0" prefWidth="426.0">
+        <columns>
+          <TableColumn prefWidth="31.0" text="ID" />
+          <TableColumn prefWidth="42.0" text="imie" />
+            <TableColumn prefWidth="59.0" text="nazwisko" />
+            <TableColumn prefWidth="58.0" text="ulica" />
+            <TableColumn prefWidth="69.0" text="nr_domu" />
+            <TableColumn prefWidth="82.0" text="kod_pocztowy" />
+            <TableColumn prefWidth="83.0" text="miasto" />
+        </columns>
+      </TableView>
+   </children>
 </AnchorPane>
