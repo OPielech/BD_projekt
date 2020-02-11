@@ -120,7 +120,26 @@ public class MainWindowController {
     }//end of openCustomerApp
 
     public void openEmployeeApp(){
-        System.out.println("też fajnie");
+        try {
+            isOpen = true;
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/EmployeeApp.fxml"));
+            Parent parent = fxmlLoader.load();
+
+            EmployeeAppController employeeAppController = fxmlLoader.getController();
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Employee application");
+            stage.initModality(Modality.WINDOW_MODAL);
+            employeeAppController.setLogin(login);
+            employeeAppController.setPassword(password);
+
+            stage.showAndWait();
+            isOpen = false;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }//end of openEmployeeApp
 
 }//end of class

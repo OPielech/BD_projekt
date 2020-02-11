@@ -1,6 +1,4 @@
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 
 public class Order {
@@ -8,7 +6,7 @@ public class Order {
     private StringProperty id_kwiat;
     private StringProperty liczba_sztuk;
     private IntegerProperty id_ulozenie;
-    private IntegerProperty id_dodatek;
+    private StringProperty id_dodatek;
     private StringProperty data_dostarczenia;
     private StringProperty pora_dostarczenia;
     private IntegerProperty id_klient;
@@ -18,20 +16,20 @@ public class Order {
     private IntegerProperty id_kurier;
     private StringProperty status_zamowienia;
 
-    public Order(IntegerProperty id, StringProperty id_kwiat, StringProperty liczba_sztuk, IntegerProperty id_ulozenie, IntegerProperty id_dodatek, StringProperty data_dostarczenia, StringProperty pora_dostarczenia, IntegerProperty id_klient, IntegerProperty id_adresat, DoubleProperty cena, StringProperty sposob_zaplaty, IntegerProperty id_kurier, StringProperty status_zamowienia) {
-        this.id = id;
-        this.id_kwiat = id_kwiat;
-        this.liczba_sztuk = liczba_sztuk;
-        this.id_ulozenie = id_ulozenie;
-        this.id_dodatek = id_dodatek;
-        this.data_dostarczenia = data_dostarczenia;
-        this.pora_dostarczenia = pora_dostarczenia;
-        this.id_klient = id_klient;
-        this.id_adresat = id_adresat;
-        this.cena = cena;
-        this.sposob_zaplaty = sposob_zaplaty;
-        this.id_kurier = id_kurier;
-        this.status_zamowienia = status_zamowienia;
+    public Order() {
+        id = new SimpleIntegerProperty();
+        id_kwiat = new SimpleStringProperty();
+        liczba_sztuk = new SimpleStringProperty();
+        id_ulozenie = new SimpleIntegerProperty();
+        id_dodatek = new SimpleStringProperty();
+        data_dostarczenia =new SimpleStringProperty();
+        pora_dostarczenia =new SimpleStringProperty();
+        id_klient = new SimpleIntegerProperty();
+        id_adresat = new SimpleIntegerProperty();
+        cena = new SimpleDoubleProperty();
+        sposob_zaplaty = new SimpleStringProperty();
+        id_kurier = new SimpleIntegerProperty();
+        status_zamowienia = new SimpleStringProperty();
     }
 
     public int getId() {
@@ -82,15 +80,15 @@ public class Order {
         this.id_ulozenie.set(id_ulozenie);
     }
 
-    public int getId_dodatek() {
+    public String getId_dodatek() {
         return id_dodatek.get();
     }
 
-    public IntegerProperty id_dodatekProperty() {
+    public StringProperty id_dodatekProperty() {
         return id_dodatek;
     }
 
-    public void setId_dodatek(int id_dodatek) {
+    public void setId_dodatek(String id_dodatek) {
         this.id_dodatek.set(id_dodatek);
     }
 

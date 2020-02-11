@@ -1,6 +1,4 @@
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 public class Flower {
     private IntegerProperty id;
@@ -8,11 +6,11 @@ public class Flower {
     private StringProperty kolor;
     private DoubleProperty cena;
 
-    public Flower(IntegerProperty id, StringProperty typ, StringProperty kolor, DoubleProperty cena) {
-        this.id = id;
-        this.typ = typ;
-        this.kolor = kolor;
-        this.cena = cena;
+    public Flower(){
+        id = new SimpleIntegerProperty();
+        typ = new SimpleStringProperty();
+        kolor = new SimpleStringProperty();
+        cena = new SimpleDoubleProperty();
     }
 
     public int getId() {
